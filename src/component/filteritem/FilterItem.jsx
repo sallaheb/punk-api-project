@@ -9,7 +9,6 @@ const FilterItem= (props) => {
     else {
       props.setChecked(false)
     }
-
   }
 
   return (

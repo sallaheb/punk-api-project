@@ -7,7 +7,13 @@ import { useState } from 'react';
 
 const App = () => {
 
+
+  /// lowest common parent rule for main & nav functionalities///////////////////////
+
+  ////////search states to be passed down as props from Apps level////////////////////
   const [searchTerm, setSearchTerm]= useState("");
+
+  ////////filter states to be passed down as props from Apps level////////////////////
   
   const [abv, setAbv] = useState(false);
   const [classic, setClassic] = useState(false);
