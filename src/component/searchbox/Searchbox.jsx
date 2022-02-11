@@ -2,12 +2,17 @@ import "./Searchbox.scss";
 
 
 const Searchbox= (props) => {
-  const {searchTerm} = props 
+  const {setSearchTerm} = props 
+
+  const handleInput = (event) => {
+    setSearchTerm(event.target.value);
+}
+
 
   return (
     <form className="search-box">
       <label htmlFor="Beers"></label>
-      <input type="text" value={searchTerm} />
+      <input type="text" onInput={handleInput} />
     </form>
   );
 }

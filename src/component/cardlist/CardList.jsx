@@ -9,17 +9,55 @@ const beerImages = beers.map(beer => beer.image_url).slice(0,7);
 
 //images nameofbeer, description//
 
-const CardList= () => {
+const CardList= (props) => {
+
+  const {abv, classic, acidic } = props;
+  
+  const {searchTerm} = props;
+
+  const renderBeers = beers.map(beer => {
+    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+  })
+ const searchFilterTerm =
+   beers.filter(beer => {
+     return beer.name.toLowerCase().includes(searchTerm.toLowerCase())
+   })
+ 
+   const displayFilteredTerm =
+   searchFilterTerm.map(beer => {
+    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url}
+    />
+   })
+   const filterbyabv = beers.filter(beer=> {
+     return beer.abv > 6; 
+   })
+
+   const displayabv = filterbyabv.map(beer=>{
+     return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+   })
+
+
+   const filterbyclassic = beers.filter(beer=> {
+    return beer.first_brewed.split("/")[1] < 2010;
+  })
+
+  const displayclassic = filterbyclassic.map(beer=>{
+    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+  })
+
+
+  const filterbyacidic = beers.filter(beer=> {
+    return beer.ph < 4;
+  })
+
+  const displayacidic = filterbyacidic.map(beer=>{
+    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+  })
 
 
   return (
     <div className="cardlist">
-      <Card  nameofbeer= {beerName[0]} description= {beerDescription[0]} images={beerImages[0]}/>
-      <Card nameofbeer= {beerName[1]} description= {beerDescription[1]} images={beerImages[1]}/>
-      <Card nameofbeer= {beerName[2]} description= {beerDescription[2]} images={beerImages[2]}/>
-      <Card nameofbeer= {beerName[3]} description= {beerDescription[3]} images={beerImages[3]}/>
-      <Card nameofbeer= {beerName[4]} description= {beerDescription[4]} images={beerImages[4]}/>
-      <Card nameofbeer= {beerName[5]} description= {beerDescription[5]} images={beerImages[5]}/>
+     {acidic?displayacidic:classic?displayclassic : abv?displayabv : searchTerm ? displayFilteredTerm : renderBeers}
 
 
     </div>

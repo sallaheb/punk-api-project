@@ -4,13 +4,13 @@ import "./Card.scss";
 
 const Card= (props) => {
 
-  const {nameofbeer, images} = props
+  const {name, image, tagline} = props
 
   return (
     <div className="card">
-      <img src= {images} alt="" className="card__image" />
-      <h1>{nameofbeer}</h1>
-      <p>Here is all the most important info about the beer</p>
+      <img src= {image} alt="" className="card__image" />
+      <h1>{name}</h1>
+      <p>{tagline}</p>
     </div>
   );
 }
