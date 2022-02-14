@@ -76,10 +76,44 @@ useEffect(() => {
 
 
 
+const multipleSelection = () => {
+  let firstCondition=[];
+  let secondCondition=[];
+  let thirdCondition=[];
+
+ if(classic && acidic && abv) {
+  firstCondition = displayFunction(filterbyclassic());
+  secondCondition =  displayFunction(filterbyacidic());
+  thirdCondition = displayFunction(filterbyabv());
+  return [secondCondition, firstCondition, thirdCondition]
+} else if(classic && acidic) {
+  firstCondition = displayFunction(filterbyclassic());
+  secondCondition =  displayFunction(filterbyacidic());
+  return [secondCondition, firstCondition]
+} else if(classic && abv) {
+  firstCondition = displayFunction(filterbyclassic());
+  thirdCondition = displayFunction(filterbyabv());
+  return [firstCondition, thirdCondition]
+}else if (abv && acidic) {
+  secondCondition =  displayFunction(filterbyacidic());
+  thirdCondition = displayFunction(filterbyabv());
+  return [secondCondition, thirdCondition]
+} else if (abv) {
+  return displayFunction(filterbyabv());
+} else if (classic) {
+  return displayFunction(filterbyclassic())
+} else if (acidic) {
+  return displayFunction(filterbyacidic());
+} else {
+  return renderBeers()
+}
+}
+
+
 
   return (
     <div className="cardlist">
-     {beers && (acidic? displayFunction(filterbyacidic()):classic?displayFunction(filterbyclassic()):abv?displayFunction(filterbyabv()):searchTerm? displayFunction(searchFilterTerm()):renderBeers())}
+      {beers && multipleSelection()}
     </div>
   );
 }
