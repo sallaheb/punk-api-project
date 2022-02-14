@@ -1,70 +1,85 @@
 import "./CardList.scss";
 import Card from "../card/Card";
-import beers from "../../../src/data/beers";
-
+import React, {useState, useEffect} from "react";
 
 
 const CardList= (props) => {
 
-  ////fetching Api/////
-  
-
   const {abv, classic, acidic } = props;
   const {searchTerm} = props;
 
+const [beers, setBeers] = useState(false);
 
-  /////////////////////map over beers and return component of card////////////////////
+const getData = () => {
+  fetch("https://api.punkapi.com/v2/beers?page=1&per_page=6")
+  .then(res => {
+      return res.json()
+  }).then(data => {
+     setBeers(data)  
+  })
+}
 
-  const renderBeers = beers.map(beer => {
+useEffect(() => {
+  return getData()
+}, [])
+
+
+
+
+
+ //// /////////////////////map over beers and return component of cards no filter///////////////////////////////
+
+   
+  const renderBeers = () => {
+    return beers.map(beer => {
     return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
   })
+}
 
- ////////filter and then map over filter to connect Search functionality and return component of card based on searchTerm state passed down as prop/////////////////////
+
+ ////////filter and then map over filter to connect Search functionality and return component of card based on searchTerm state passed down as prop/////////////////////////////////////////////////////////////////////////
  
-  const searchFilterTerm =
-   beers.filter(beer => {
+   const searchFilterTerm = () => {
+     return beers.filter(beer => {
      return beer.name.toLowerCase().includes(searchTerm.toLowerCase())
    })
- 
-   const displayFilteredTerm =
-   searchFilterTerm.map(beer => {
-    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url}
-    />
-   })
+  }
+
+  const displayFunction = (arr) => {
+   return arr.map((beer) => {
+      return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+     })
+  }
+
 
 ////////filter and then map over filter to connect filter functionality and return component of card based on filter states passed down as prop/////////////////////
 
 
-   const filterbyabv = beers.filter(beer=> {
+
+  const filterbyabv = () => {
+     return beers.filter(beer=> {
      return beer.abv > 6; 
    })
+  }
 
-   const displayabv = filterbyabv.map(beer=>{
-     return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
-   })
-
-
-   const filterbyclassic = beers.filter(beer=> {
+  const filterbyclassic = () => {
+    return beers.filter(beer=> {
     return beer.first_brewed.split("/")[1] < 2010;
-  })
+   })
+  }
 
-  const displayclassic = filterbyclassic.map(beer=>{
-    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
-  })
-
-
-  const filterbyacidic = beers.filter(beer=> {
+  const filterbyacidic = () => { 
+    return beers.filter(beer=> {
     return beer.ph < 4;
   })
+}
 
-  const displayacidic = filterbyacidic.map(beer=>{
-    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
-  })
+
 
 
   return (
     <div className="cardlist">
-     {acidic?displayacidic:classic?displayclassic:abv?displayabv:searchTerm? displayFilteredTerm:renderBeers}
+     {beers && (acidic? displayFunction(filterbyacidic()):classic?displayFunction(filterbyclassic()):abv?displayFunction(filterbyabv()):searchTerm? displayFunction(searchFilterTerm()):renderBeers())}
     </div>
   );
 }
