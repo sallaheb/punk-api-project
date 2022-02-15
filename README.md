@@ -30,12 +30,12 @@ The website had the following functionalities in design
 
 ![searchbar](https://user-images.githubusercontent.com/97259224/153977053-589bdf81-b118-4771-ae95-b453cc8034f9.PNG)
 
-###  `one filter section: easy to code`
+###  `one filter selection: easy to code`
 
 ![selectingoneitem](https://user-images.githubusercontent.com/97259224/153977094-ea68e06f-d7ea-4d0c-bf55-017b3c641391.PNG)
 
 
-###  `multiple filter section: slighlty more challenging`
+###  `multiple filter selection: slighlty more challenging`
 
 ![multipleselection](https://user-images.githubusercontent.com/97259224/153977129-b0c2b6c9-5892-420f-a9f6-8e96ba76452c.PNG)
 
