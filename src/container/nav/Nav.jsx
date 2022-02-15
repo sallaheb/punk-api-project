@@ -1,4 +1,3 @@
-
 import Searchbox from "../../component/searchbox/Searchbox";
 import FilterList from "../filterlist/FilterList";
 import "./Nav.scss";

@@ -32,7 +32,7 @@ useEffect(() => {
    
   const renderBeers = () => {
     return beers.map(beer => {
-    return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+    return <Card name = {beer.name} description = {beer.description} image = {beer.image_url} />
   })
 }
 
@@ -47,7 +47,7 @@ useEffect(() => {
 
   const displayFunction = (arr) => {
    return arr.map((beer) => {
-      return <Card name = {beer.name} tagline = {beer.tagline} image = {beer.image_url} />
+      return <Card name = {beer.name} description = {beer.description} image = {beer.image_url} />
      })
   }
 
@@ -104,12 +104,12 @@ const multipleSelection = () => {
   return displayFunction(filterbyclassic())
 } else if (acidic) {
   return displayFunction(filterbyacidic());
+} else if(searchTerm) {
+  return displayFunction(searchFilterTerm());
 } else {
   return renderBeers()
 }
 }
-
-
 
   return (
     <div className="cardlist">

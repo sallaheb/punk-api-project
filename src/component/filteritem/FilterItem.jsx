@@ -14,7 +14,7 @@ const FilterItem= (props) => {
   return (
     <div className="filter-item">
       <h2>{props.text}</h2>
-      <input type="checkbox" onChange={handleCheck} />
+      <input type="checkbox" onChange={handleCheck} className="filter-item__checkbox" />
     </div>
   );
 }
