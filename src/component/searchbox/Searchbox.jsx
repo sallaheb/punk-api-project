@@ -12,7 +12,7 @@ const Searchbox= (props) => {
   return (
     <form className="search-box">
       <label htmlFor="Beers"></label>
-      <input type="text" onInput={handleInput} />
+      <input type="text" onInput={handleInput} id="Beers"/>
     </form>
   );
 }
